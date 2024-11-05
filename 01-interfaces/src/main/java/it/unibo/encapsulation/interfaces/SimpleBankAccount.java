@@ -1,14 +1,12 @@
 package it.unibo.encapsulation.interfaces;
 
 public class SimpleBankAccount implements BankAccount {
-
-    /*
-     * Aggiungere i seguenti campi:
-     * - double balance: ammontare del conto
-     * - int transactions: numero delle operazioni effettuate
-     * - static double ATM_TRANSACTION_FEE = 1: costo delle operazioni via ATM
-     */
+    
     private final int id;
+    private double balance;
+    private int transactions;
+    private static double ATM_TRANSACTION_FEE = 1;
+
 
     /*
      * Creare un costruttore pubblico che prenda in ingresso un intero (ossia l'id
@@ -16,14 +14,10 @@ public class SimpleBankAccount implements BankAccount {
      */
     public SimpleBankAccount(final int id, final double balance) {
         this.id = id;
+        this.balance = balance;
     }
 
-    /*
-     * Si aggiungano selettori per:
-     * - ottenere l'id utente del possessore del conto
-     * - ottenere il numero di transazioni effettuate
-     * - ottenere l'ammontare corrente del conto.
-     */
+
     public int getid() {
         return this.id;
     }
@@ -42,6 +36,10 @@ public class SimpleBankAccount implements BankAccount {
          * conto Nota: il deposito va a buon fine solo se l'id utente
          * corrisponde
          */
+        if(this.id == id){
+            this.balance += amount;
+            this.transactions++;
+        }
     }
 
     public void withdraw(final int id, final double amount) {
@@ -50,6 +48,10 @@ public class SimpleBankAccount implements BankAccount {
          * conto. Note: - Il conto puo' andare in rosso (ammontare negativo) -
          * Il prelievo va a buon fine solo se l'id utente corrisponde
          */
+        if(this.id == id){
+            this.balance -= amount;
+            this.transactions++;
+        }
     }
 
     public void depositFromATM(final int id, final double amount) {
